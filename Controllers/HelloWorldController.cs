@@ -7,13 +7,17 @@ namespace curso_apis_.net.Controllers;
 public class HelloWorldController : ControllerBase
 {
     IHelloWorldService helloWorldService;
+    private readonly ILogger<HelloworldService> _Logger;
 
-    public HelloWorldController(IHelloWorldService helloWorld)
+    public HelloWorldController(IHelloWorldService helloWorld, ILogger<HelloworldService> Logger)
     {
         helloWorldService = helloWorld;
+        _Logger = Logger;
     }
     public IActionResult Get()
     {
+        _Logger.LogInformation("[Information] Llamado a Get de HelloWorld");
+        _Logger.LogDebug("[Debug] Llamado a Get de HelloWorld");
         return Ok(helloWorldService.GetHelloWorld());
     }
 }
